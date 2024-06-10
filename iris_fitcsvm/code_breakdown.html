@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Explanation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+    code {
+      background-color: #f4f4f4;
+      padding: 0.2em 0.4em;
+      border-radius: 0.3em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Code Explanation</h1>
+  <p>This code performs Support Vector Machine (SVM) binary classification on the Fisher Iris dataset. Here's the explanation of each part of the code:</p>
+
+  <ol>
+    <li><strong>Loading Fisher Iris Dataset:</strong></li>
+    <pre><code>load fisheriris</code></pre>
+    <p>This command loads the Fisher Iris dataset into the MATLAB workspace. The dataset contains measurements of sepal length, sepal width, petal length, and petal width for three species of iris flowers: setosa, versicolor, and virginica.</p>
+
+    <li><strong>Extracting Binary Classification Data:</strong></li>
+    <pre><code>inds = ~strcmp(species,'setosa');
+X = meas(inds,3:4);
+y = species(inds);</code></pre>
+    <p>This code extracts data for binary classification by excluding the setosa species. It creates a logical index <code>inds</code> to select all species except setosa. Then, it selects petal length and petal width from the <code>meas</code> matrix as features <code>X</code>, and extracts the corresponding species labels <code>y</code>.</p>
+
+    <li><strong>Training SVM Model:</strong></li>
+    <pre><code>SVMModel = fitcsvm(X,y);</code></pre>
+    <p>This command trains an SVM classifier (<code>SVMModel</code>) using features <code>X</code> and labels <code>y</code>. By default, <code>fitcsvm</code> uses a linear kernel for classification.</p>
+
+    <li><strong>Obtaining Class Order:</strong></li>
+    <pre><code>classOrder = SVMModel.ClassNames;</code></pre>
+    <p>This line of code obtains the class names used by the SVM model. In this case, since it's a binary classification problem, <code>classOrder</code> will contain the class names 'versicolor' and 'virginica'.</p>
+
+    <li><strong>Visualizing Support Vectors:</strong></li>
+    <pre><code>sv = SVMModel.SupportVectors;
+figure
+gscatter(X(:,1),X(:,2),y)
+hold on
+plot(sv(:,1),sv(:,2),'ko','MarkerSize',10)
+legend('versicolor','virginica','Support Vector')
+hold off</code></pre>
+    <p>This code visualizes the training data and support vectors in a scatter plot. It plots petal length (<code>X(:,1)</code>) on the x-axis and petal width (<code>X(:,2)</code>) on the y-axis. It uses <code>gscatter</code> function to color data points by their respective classes. Then, it plots support vectors as black circles ('ko'). Finally, a legend is added to distinguish between classes and support vectors.</p>
+  </ol>
+<h1>Results</h1>
+<img src="iris.png" alt="" width="500" height="600">
+</body>
+</html>
