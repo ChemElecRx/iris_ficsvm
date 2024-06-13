@@ -13,4 +13,4 @@ gscatter(X(:,1),X(:,2),y)
 hold on
 plot(sv(:,1),sv(:,2),'ko','MarkerSize',10)
 legend('versicolor','virginica','Support Vector')
-hold offir
+hold off
